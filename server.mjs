@@ -5,10 +5,10 @@
 //  res.end();
 //}).listen(process.env.PORT);
 
-let http = require('http')
-let url = require('url')
-let util = require('util')
-let fs = require('fs')
+import http from 'http'
+import url  from 'url'
+import util from 'util'
+import fs   from 'fs'
 
 let server = http.createServer((req,res) => {
   var pathname = url.parse(req.url).pathname
