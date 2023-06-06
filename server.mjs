@@ -1,3 +1,15 @@
+import { Router } from 'express';
+import { createProxyMiddleware } from 'http-proxy-middleware'
+const router = Router();
+
+const options = {
+    target: 'https://chat.openai.com', // target host
+    changeOrigin: true, // needed for virtual hosted sites
+    pathRewrite: {
+       [`^/aaaaaa`]: '',
+    }, // rewrites our endpoints to '' when forwarded to our target
+}
+router.get('/all', createProxyMiddleware(options));
 //import { createServer } from 'http';
 //
 //createServer((req, res) => {
@@ -5,15 +17,15 @@
 //  res.end();
 //}).listen(process.env.PORT);
 
-import http from 'http'
-import url  from 'url'
-import util from 'util'
-import fs   from 'fs'
-
-let server = http.createServer((req,res) => {
-    res.writeHead(301, { Location: "http://chat.openai.com" });
-    res.end();
-})
+//import http from 'http'
+//import url  from 'url'
+//import util from 'util'
+//import fs   from 'fs'
+//
+//let server = http.createServer((req,res) => {
+//    res.writeHead(301, { Location: "http://chat.openai.com" });
+//    res.end();
+//})
 
 //let server = http.createServer((req,res) => {
 //  var pathname = url.parse(req.url).pathname
@@ -33,4 +45,4 @@ let server = http.createServer((req,res) => {
 //  })
 //})
 
-server.listen(process.env.PORT);
+//server.listen(process.env.PORT);
